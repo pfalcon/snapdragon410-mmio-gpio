@@ -1,4 +1,7 @@
-import utime as time
+try:
+    import utime as time
+except:
+    import time
 from apq8016_gpio import Pin
 
 # Only 2 of 4 Dragonboard410c LEDs are on SoC GPIOs

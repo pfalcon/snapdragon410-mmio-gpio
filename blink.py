@@ -1,4 +1,7 @@
-import utime as time
+try:
+    import utime as time
+except:
+    import time
 from apq8016_gpio import Pin
 
 led1 = Pin(21)
