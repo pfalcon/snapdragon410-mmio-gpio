@@ -26,12 +26,20 @@ class PhysMem:
         else:
             self.mv = memoryview(self.mmap).cast("H" if self.access_sz == 2 else "I")
 
-    def __getitem__(self, addr):
-        winoff = addr - self.offset
-        if not(0 <= winoff <= self.mmap_size):
+    def winoff(self, addr):
+        off = addr - self.offset
+        if not(0 <= off <= self.mmap_size):
             self.map(addr)
-            winoff = addr - self.offset
-        return self.mv[winoff // self.access_sz]
+            off = addr - self.offset
+        return off
+
+    def __getitem__(self, addr):
+        off = self.winoff(addr)
+        return self.mv[off // self.access_sz]
+
+    def __setitem__(self, addr, val):
+        off = self.winoff(addr)
+        self.mv[off // self.access_sz] = val
 
 
 mem8 = PhysMem(1)
