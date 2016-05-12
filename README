@@ -1,0 +1,13 @@
+These are example of controlling GPIO via hardware registers on
+Snapdragon 410 system-on-chip (specific SoC model: APQ8016), as
+used in various Android phones and with 96Boards project's
+single-board computer Dragonboard410c.
+
+Examples use MicroPython: https://github.com/micropython/micropython
+
+Before running them, Linux kernel triggers should be shutdown:
+
+for l in /sys/class/leds/*user*; do echo none >$l/trigger; done
+
+Examples (just as the command above) should be run as root, as
+required to access hardware in low-level way.
